@@ -8,15 +8,18 @@ public class Baraja <T>
 {
     List<Carta> mazo = new ArrayList<Carta>();
     
-    public Baraja() {
+    public Baraja()
+    {
         
     }
 
-    public List<Carta> getMazo() {
+    public List<Carta> getMazo()
+    {
         return mazo;
     }
 
-    public void setMazo(List<Carta> mazo) {
+    public void setMazo(List<Carta> mazo)
+    {
         this.mazo = mazo;
     }
    
@@ -25,6 +28,15 @@ public class Baraja <T>
         Carta c = new Carta(palo, identificadorCarta);
         mazo.add(c);      
     }
+
+    /*public String mostrarCartas(){
+        String carta = "";
+        for (int i = 0; i < mazo.size(); i++){
+            carta += mazo.get(i).toString();       
+        }
+        return carta;
+    }*/
+    
 }
 /*
 public static final int NAIPE = 40;

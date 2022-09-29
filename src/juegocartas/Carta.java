@@ -25,5 +25,11 @@ public class Carta
     public void setIdentificadorCarta(String identificadorCarta) {
         this.identificadorCarta = identificadorCarta;
     }
+
+    @Override
+    public String toString() {
+        return "Carta{" + "palo=" + palo + ", identificadorCarta=" + identificadorCarta + '}';
+    }
+    
     
 }
