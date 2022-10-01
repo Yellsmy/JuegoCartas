@@ -1,49 +1,49 @@
 package juegocartas;
 /***********************************************
-* Producto.java
-* Yellsmy Toj
+* Carta.java
+* Yellsmy - Eddison - Roberto - Wilson
 *
-* Esta clase genérica detalla un producto 
-* tanto el código, el nombre y su precio de  
-* diferentes tipos de datos.
+* Metodos para asignar, obtener carta, concatenacion de identificador de carta y palo de carta
 ***********************************************/
 
 public class Carta 
 {
     private String palo;
     private String identificadorCarta;
-    
-    //**************************************************************
 
+    //**************************************************************
+    //Metodo constructor
     public Carta(String palo, String identificadorCarta) {
         this.palo = palo;
         this.identificadorCarta = identificadorCarta;
     }
-    
-    //**************************************************************
 
-    public String getPalo() {
+    //**************************************************************
+    // Metodos getter setter de la clase cartas
+    public String getPalo() 
+    {
         return palo;
     }
 
-    public void setPalo(String palo) {
+    public void setPalo(String palo) 
+    {
         this.palo = palo;
     }
 
-    public String getIdentificadorCarta() {
+    public String getIdentificadorCarta() 
+    {
         return identificadorCarta;
     }
 
-    public void setIdentificadorCarta(String identificadorCarta) {
+    public void setIdentificadorCarta(String identificadorCarta) 
+    {
         this.identificadorCarta = identificadorCarta;
     }
-    
-    //**************************************************************
 
+    //**************************************************************
     @Override
-    public String toString() {
-        return "Carta{" + "palo=" + palo + ", identificadorCarta=" + identificadorCarta + '}';
+    public String toString() 
+    {
+        return identificadorCarta + "-"+ palo;
     }
-    
-    
 }
