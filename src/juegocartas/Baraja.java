@@ -1,44 +1,34 @@
 package juegocartas;
-
+/***********************************************
+* Baraja.java
+* Yellsmy - Eddison - Roberto - Wilson
+*
+* Metodos para controlar la creacion de cartas, la creacion de baraja, 
+* orden de la baraja, creacion de jugadores, repartir cartas
+***********************************************/
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.TreeSet;
 
-/***********************************************
-* Producto.java
-* Yellsmy Toj
-*
-* Esta clase genérica detalla un producto 
-* tanto el código, el nombre y su precio de  
-* diferentes tipos de datos.
-***********************************************/
-
-public class Baraja <T> 
+public class Baraja 
 {
+    //Creamos la baraja ordenada
     private List<Carta> mazo = new ArrayList<Carta>();
-    
-    //**************************************************************
-    
-    public Baraja()
-    {
-        
-    }
-    
+
+    //Creamos la baraja desordenada
+    List<Carta> mazoBarajeado = new ArrayList<Carta>();
+
     //**************************************************************
 
+    //Devuelve el listado de cartas de la barja ordenada
     public List<Carta> getMazo()
     {
         return mazo;
     }
 
-    public void setMazo(List<Carta> mazo)
-    {
-        this.mazo = mazo;
-    }
-   
     //**************************************************************
-    
+
+    //Asigna las cartas a la baraja
     public void addCarta(String palo, String identificadorCarta)
     {
         Carta c = new Carta(palo, identificadorCarta);
@@ -46,16 +36,15 @@ public class Baraja <T>
     }
     
     //**************************************************************
-    
+    // Generador de indices aleatorios para Barajear el mazo
     public int random()
     {
-        Random random = new Random();
         int randomIndex = (int)(Math.random()*52);
         return randomIndex;        
     }
     
     //**************************************************************
-    
+    //Crea las cartas para la baraja
     public void generarCarta(String palo)
     {
         int contador = 1;
@@ -83,7 +72,7 @@ public class Baraja <T>
     }
     
     //**************************************************************
-    
+    // Asigna un tipo de palo a la carta creada
     public void llenarMazo()
     {
         while (true){
@@ -105,15 +94,11 @@ public class Baraja <T>
                 break;
             }
         }
-        
-        for (int i = 0; i < mazo.size(); i++)
-        {
-            System.out.println("Carta es: "+mazo.get(i).toString());     
-        }      
+
     }
     
     //**************************************************************
-
+    //Metodo para controlar cartas repetidas 
     public boolean cartasIguales(List<Carta> list, String paloMazo1, String idenMazo1 )
     {
         for (int i = 0; i < list.size(); i++)
@@ -128,10 +113,10 @@ public class Baraja <T>
     }
     
     //**************************************************************
-
+    //Cambiamos el orden de la baraja 
     public void barajear()
     {
-        List<Carta> mazoBarajeado = new ArrayList<Carta>();
+        
         while(mazo.size() != mazoBarajeado.size())
         {
             int posicionCarta= random();
@@ -144,53 +129,47 @@ public class Baraja <T>
             }           
         }
         System.out.println("MAZO BARAJEADO");
-        for (int i = 0; i < mazoBarajeado.size(); i++)
-        {
-            System.out.println("Carta es: "+mazoBarajeado.get(i).toString());     
-        }
-    }    
-}
-/*
-public static final int NAIPE = 40;
-    public static void main(String[] args) {
 
-        List<String> baraja = new ArrayList<String>();
-        int numCorazon=0;
-        int numPicas=0;
-        int numDiamantes=0;
-        int numTrebol=0;
-        for (int i = 0; i < NAIPE; i++){
-            int sizeBaraja=baraja.size();
-            
-            if(sizeBaraja<=9){
-                numPicas+= 1;
-                String numeroCarta = Integer.toString(numPicas);
-                baraja.add(numeroCarta+" de "+"Picas");
-                System.out.println(numeroCarta+' '+sizeBaraja);
+    }    
+
+    //Asignamos cartas a un jugador
+    public TreeSet<String> repartirCarta(int jugador)
+    {
+        System.out.println("CARTAS JUGADOR "+ (jugador+1));
+        TreeSet<String> lista = new TreeSet<String>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            if(i >= mazoBarajeado.size())
+            {
+                try
+                {
+                    lista.add(mazoBarajeado.get(mazoBarajeado.size()-1).toString());     
+                    mazoBarajeado.remove(mazoBarajeado.size()-1);
+                }
+                catch(ArrayIndexOutOfBoundsException error)
+                {
+                    System.out.println("Lo sientimos Cantidad de cartas insuficiente para el ultimo jugador inicia de nuevo");
+                    break;
+                }
             }
-            else if(sizeBaraja>9 && sizeBaraja<=19){
-                numCorazon += 1;
-                String numeroCarta = Integer.toString(numCorazon);
-                baraja.add(numeroCarta+" de "+"Corazones");
-                System.out.println(numeroCarta+' '+sizeBaraja);
-            }
-            else if(sizeBaraja>19 && sizeBaraja<=29){
-                numDiamantes+= 1;
-                String numeroCarta = Integer.toString(numDiamantes);
-                baraja.add(numeroCarta+" de "+"Diamantes");
-                System.out.println(numeroCarta+' '+sizeBaraja);
-            }
-            else if(sizeBaraja>29 && sizeBaraja<=39){
-                numTrebol+= 1;
-                String numeroCarta = Integer.toString(numTrebol);
-                baraja.add(numeroCarta+" de "+"Treboles");
-                System.out.println(numeroCarta+' '+sizeBaraja);
+            else
+            {
+                lista.add(mazoBarajeado.get(i).toString());     
+                mazoBarajeado.remove(i);
             }
         }
-        // Create a TreeSet with the list
-        TreeSet<String> tree_set = new TreeSet<String>(baraja);
- 
-        // Print TreeSet
-        System.out.println("TreeSet from List : " + tree_set);
-    }
-}*/
+        return lista;
+    }    
+
+    //Creamos el numero de jugadores y repartimos cartas
+    public void Jugadores(int jugadores )
+    {
+        System.out.println("CANTIDAD DE JUGADORES "+jugadores);
+        for (int i = 0; i < jugadores; i++)
+        {
+            System.out.println(repartirCarta(i));
+        }
+    }   
+
+}
