@@ -1,24 +1,23 @@
 package juegocartas;
 /***********************************************
-* Tripleta.java
-* Yellsmy Toj
+* JuegoCartas.java
+* Yellsmy - Eddison - Roberto - Wilson
 *
-* Clase principal que contiene el método main para ejecutar las diversas
-* funcionalidades de la clase Producto
+* Main ejecuta la clase baraja, crea una baraja, cambia el orden de la baraja y reparte cartas a los jugadores 
 ***********************************************/
 
-public class JuegoCartas {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        //LlenarBaraja llenado = new LlenarBaraja();
-        //llenado.llenarMazo();
+public class JuegoCartas 
+{
+    public static void main(String[] args) 
+    {
+        //Instancia de la clase baraja 
         Baraja baraja = new Baraja();
+        //Creacion de la baraja
         baraja.llenarMazo();
+        //Barajear cartas
         baraja.barajear();
-       
-    }
-}
+        //Repartir cartas a jugadores
+        baraja.Jugadores(3);
+    }//End main
+
+}//End clase JuegoCartas
